@@ -1,184 +1,782 @@
-![Gatsby E-commerce theme designed by Matter](https://user-images.githubusercontent.com/43764894/223762927-2e463570-b09a-4d51-ab81-2e0fa8aa2c70.png)
-
-This beautiful theme from the [Matter Design Team](https://matterdesign.com.au/) gives you the styling and scaffolding for your next e-commerce site. You can customize to your heart's content and add the tooling for cart, transactions, product, and more. This theme uses:
-
-- [Gatsby](https://www.gatsbyjs.com/)
-- [CSS Modules](https://github.com/css-modules/css-modules)
-- [Prettier](https://prettier.io/)
-- [React Helmet](https://github.com/nfl/react-helmet)
-
-Take a look at the screenshot below or preview the live site here: https://gatsby-ecommerce-theme.netlify.app/!
-![full page screenshot](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1653371030/CleanShot_2022-05-24_at_01.11.52_2x_bspa8c.jpg)
-
-> 🧐 Please be aware that some aspects of this theme are not fully functional and will need to be integrated with the recommended tooling mentioned at the end of the [README](#next-steps-with-this-theme). 
-
-## Table of Contents:
-
-- [Quick Steps + Deploy Options](#quick-setup--deploy-option)
-  - [Cloning + Installing Packages](#cloning--installing-packages)
-- [Deploying](#deploying)
-- [Project Structure](#project-structure)
-  - [Making Changes to the Hero Component](#making-changes-to-the-hero-component)
-  - [Making Changes to the Header or Footer](#making-content-changes-to-the-header-or-footer)
-- [Testing](#testing)
-  - [Included Default Testing](#included-default-testing)
-  - [Removing Renovate](#removing-renovate)
-- [Next Steps with This Theme](#next-steps-with-this-theme)
-
-## Quick Setup + Deploy Option
-
-Click the button below and it will help you create a new repo, create a new Netlify project, and deploy this Theme!
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/gatsby-ecommerce-theme&utm_source=github&utm_medium=matter-design-theme-repo&utm_campaign=template-team)
-
-## Regular Setup
-
- ### Cloning + Installing Packages
- 
-  - Clone this repo with one of these options:
-
-    - Click the 'Use this template' button at the top of the page
-    - Via the command line:
-       ```shell
-       git clone https://github.com/netlify-templates/gatsby-ecommerce-theme/
-       ```
-    - Or you can clone the theme straight from the Netlify CLI, using the `netlify sites:create-template` command in your terminal ([learn more about this command here](https://www.netlify.com/blog/create-a-site-from-a-template-using-the-netlify-cli)) to do the entire flow for you.
-
-  From there, you can install the project's dependencies by running:
-
-  ```shell
-  npm install or yarn install
-  ```
-
-  Finally, you can run your project locally with:
-
-  ```shell
-  cd gatsby-sydney-ecommerce-theme/
-  npm start or yarn start
-  ```
-  
-  or, run it using the Netlify CLI with:
-  
-  ```shell
-  netlify run dev
-  ```
-  
-  Open your browser and visit <http://localhost:5000>, your project should now be running!
-  
-  ## Deploying
- 
-  After installing and customizing your new e-commerce theme it's now time to deploy! 
-  
-   -  You can Deploy using the [Netlify CLI](https://cli.netlify.com/):
-
-      ```bash
-      netlify init # initialize a new Netlify project & deploy
-      ```
-
-   It will use the information from the included Netlify configuration file, [`netlify.toml`](./netlify.toml), to set up the build command as `gatsby build` to create a static project and locate the build project in the `public` directory.
-
-   The `init` process will also set up continuous deployment for your project so that a new build will be triggered & deployed when you push code to the repo (you can change this from your project dashboard: Site Settings/Build & deploy/Continuous Deployment).
-
-   You can also use `netlify deploy (--prod)` to manually deploy and `netlify open` to open your project dashboard.
-
-  > 💡 we only have so many keystrokes to give, use `ntl` shorthand for `netlify` or make [an alias of your own](https://www.netlify.com/blog/2020/04/12/speed-up-productivity-with-terminal-aliases/) to save hours...of accumulated milliseconds
-
-  - You can deploy within the Netlify site by connecting to git, this [video](https://www.youtube.com/watch?v=4h8B080Mv4U&t=107s) will walk you through that process. 
-  - Or, you can use the Deploy to Netlify button which will walk you through the process of spinning up a repo, creating a new project in Netlify, AND deploying it :)
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/gatsby-ecommerce-theme&utm_source=github&utm_medium=matter-design-theme-repo&utm_campaign=template-team)
-
-## Project Structure
-
-Here is a bit of an overview of the directory structure of the project:
-
-| Directory | Description |
-| :---- | :---- |
-| `src/components/` | Stores reusable elements across the site. (e.g. BlogPreview element) |
-| `src/pages/` | Stores routes for a user to go to based on each `.js` file and nested folder (e.g. `src/pages/about.js` creates a route `/about` in the web app) |
-| `src/helpers` | Stores mock data for the blog or product list and general utility functions. |
-
-### Making changes to the Hero component
-
-On the homepage of the website and a few other places, there is a full-width image component. We refer to this as the `<Hero/>` component. Here is a bit of an overview of what its API looks like:
-
-```jsx
-<Hero
-  maxWidth='500px' // how big the image's maxumim should be
-  image={'/banner1.png'} // the source location for the image
-  title={'Essentials for a cold winter'} // the main text displayed
-  subtitle={'Discover Autumn Winter 2021'} // text found below the main text
-  ctaText={'shop now'} // the presented text for a user to click on
-  ctaAction={goToShop} // the location the call-to-action text directs users
-/>
-```
-
-You can see it in action under [`src/pages/index.js`](./src/pages/index.js) or see the component in [`src/components/Hero/Hero.js`](./src/components/Hero/Hero.js).
-
-### Making content changes to the Header or Footer
-
-The project contains a file named `src/config.json`. Inside of this file describes the content of the header links (`headerLinks`) as well as the footer links (`footerLinks`). For the header, each element in the array has a base structure of:
-
-```json
-{
-  "menuLabel": "The label that is given to a user",
-  "menuLink": "The URL that this should take a user to"
-}
-```
-
-If you want the menu item to have a dropdown, you can also add a `category` key with the value being an array of the categories and their containing elements, here's what the base could look like:
-
-```json
-{
-  "menuLabel": "The label that is given to a user",
-  "menuLink": "The URL that this should take a user to",
-  "category": [
-    {
-      "categoryLabel": "Label you want the category to have",
-      "submenu": [
-        {
-          "menuLabel": "A label underneath the category",
-          "menuLink": "The associated link to this label"
-        }
-      ]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GJB Sports – Baseball & Softball Training</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --gjb-red: #c62828;
+      --gjb-black: #111111;
+      --gjb-light: #f7f7f7;
+      --gjb-gray: #e0e0e0;
     }
-  ]
-}
-```
 
-The footer works in a similar way. It assumes each element in the array has a heading and an array of associated links to direct folks to:
-
-```json
-"footerLinks": [
-    {
-      "subTitle": "Label of the column in the footer",
-      "links": [
-        {
-          "text": "Text to display to the user",
-          "link": "URL of where to take the user to when clicked"
-        },
-      ]
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-]
-```
 
-## Testing
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #ffffff;
+      color: #111111;
+      line-height: 1.6;
+    }
 
-### Included Default Testing
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-We’ve included some tooling that helps us maintain these templates. This template currently uses:
+    /* HEADER & NAV */
 
-- [Renovate](https://www.mend.io/free-developer-tools/renovate/) - to regularly update our dependencies
+    header {
+      background: var(--gjb-black);
+      color: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-If your team is not interested in this tooling, you can remove them with ease!
+    .nav-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 1rem;
+    }
 
-### Removing Renovate
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
 
-In order to keep our project up-to-date with dependencies we use a tool called [Renovate](https://github.com/marketplace/renovate). If you’re not interested in this tooling, delete the `renovate.json` file and commit that onto your main branch.
+    .logo-wrap img {
+      height: 52px;
+      width: 52px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 4px;
+    }
 
-## Next Steps with this theme
+    .logo-text {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 1.05rem;
+    }
 
-This project is intended to be extended by you! We wanted to make possible to replace parts of it with your own tools and data sources. If you're interested on a direction, you can refer to Matter's [how to use section](https://gatsby-ecommerce-theme.netlify.app/how-to-use/) in this project or you may want to consider using [Matter's toolset with their JAMM framework](https://matterdesign.com.au/service/headless-commerce-with-jamm/) which includes some projects like:
-- [BigCommerce](https://bigcommerce.zfrcsk.net/c/2429593/854992/2941) for a headless e-commerce solution
-- [Builder](https://www.builder.io) as a CMS for the blog articles or other content creation
-- [Klaviyo](https://www.klaviyo.com/) for any email or SMS marketing automation
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    nav a:hover {
+      background: #ffffff;
+      color: var(--gjb-black);
+    }
+
+    /* HERO */
+
+    .hero {
+      background: linear-gradient(
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.7)
+        ),
+        url("https://images.pexels.com/photos/1467181/pexels-photo-1467181.jpeg?auto=compress&cs=tinysrgb&w=1600")
+          center/cover no-repeat;
+      color: #ffffff;
+      padding: 4.5rem 1.25rem;
+      text-align: center;
+    }
+
+    .hero-inner {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-block;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--gjb-red);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--gjb-black);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+    }
+
+    /* LAYOUT */
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.5rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      position: relative;
+      padding-bottom: 0.4rem;
+    }
+
+    section h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--gjb-red);
+    }
+
+    .section-subtitle {
+      color: #555;
+      margin-bottom: 1.3rem;
+      font-size: 0.95rem;
+    }
+
+    /* LESSONS */
+
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .coach-card {
+      background: var(--gjb-light);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .coach-header {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .coach-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .coach-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .coach-role {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .coach-details {
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .lesson-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .lesson-meta span {
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid #ddd;
+    }
+
+    /* PARTIES & CAGES */
+
+    .flex-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.8rem;
+    }
+
+    .card {
+      background: var(--gjb-light);
+      border-radius: 12px;
+      padding: 1.25rem 1.3rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-list {
+      font-size: 0.9rem;
+      margin-left: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      border: 1px solid var(--gjb-gray);
+      padding: 0.45rem 0.6rem;
+      text-align: left;
+    }
+
+    .pricing-table th {
+      background: #ffffff;
+    }
+
+    /* SHOP */
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .shop-item {
+      border-radius: 10px;
+      border: 1px solid var(--gjb-gray);
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.9rem;
+    }
+
+    .shop-item-img {
+      background: var(--gjb-light);
+      height: 120px;
+      border-radius: 8px;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #777;
+      text-transform: uppercase;
+    }
+
+    .shop-price {
+      font-weight: 700;
+      margin-top: 0.25rem;
+    }
+
+    /* GALLERY */
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .gallery-item {
+      background: #ddd;
+      height: 130px;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #555;
+      text-transform: uppercase;
+    }
+
+    /* CONTACT */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.6rem;
+    }
+
+    form {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    label {
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.55rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-info {
+      font-size: 0.9rem;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-info strong {
+      display: inline-block;
+      min-width: 80px;
+    }
+
+    footer {
+      background: var(--gjb-black);
+      color: #ffffff;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 0.9rem 0.5rem;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .lessons-grid,
+      .flex-two,
+      .shop-grid,
+      .gallery-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        row-gap: 0.35rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 3rem 1rem;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER / NAV -->
+  <header>
+    <div class="nav-wrapper">
+      <div class="logo-wrap">
+        <!-- Replace src with your logo path -->
+        <img src="images/gjb-logo.png" alt="GJB Sports logo" />
+        <div class="logo-text">GJB SPORTS</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#lessons">Lessons</a></li>
+          <li><a href="#parties">Parties &amp; Events</a></li>
+          <li><a href="#cages">Cage Rentals</a></li>
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-inner">
+      <h1>BASEBALL &amp; SOFTBALL TRAINING</h1>
+      <p>
+        High-energy, fundamentals-first instruction for athletes of all ages in
+        a positive, competitive environment.
+      </p>
+      <div class="hero-buttons">
+        <a href="#lessons" class="btn btn-primary">Book a Lesson</a>
+        <a href="#cages" class="btn btn-secondary">Rent a Cage</a>
+        <a href="#parties" class="btn btn-outline">Parties &amp; Events</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- LESSONS -->
+    <section id="lessons">
+      <h2>Lessons</h2>
+      <p class="section-subtitle">
+        One-on-one and small-group training with experienced coaches focused on
+        hitting, pitching, fielding, catching and overall confidence.
+      </p>
+
+      <div class="lessons-grid">
+        <!-- COACH JOSE -->
+        <article class="coach-card">
+          <div class="coach-header">
+            <div class="coach-photo">Coach Photo</div>
+            <!-- Replace with real photo later -->
+            <div>
+              <div class="coach-name">Coach Jose</div>
+              <div class="coach-role">Baseball &amp; Softball Instructor</div>
+            </div>
+          </div>
+          <p class="coach-details">
+            Specializes in hitting, infield/outfield defense, and game IQ.
+            Focus on mechanics, approach at the plate, and position-specific
+            work tailored to each athlete.
+          </p>
+          <div class="lesson-meta">
+            <span>Private &amp; Small Group</span>
+            <span>Baseball &amp; Softball</span>
+            <span>All Ages</span>
+          </div>
+          <!-- TODO: Link this button to your booking system (Calendly, etc.) -->
+          <a href="#contact" class="btn btn-primary"
+            >Book Lesson with Coach Jose</a
+          >
+        </article>
+
+        <!-- COACH AMANDA -->
+        <article class="coach-card">
+          <div class="coach-header">
+            <div class="coach-photo">Coach Photo</div>
+            <!-- Replace with real photo later -->
+            <div>
+              <div class="coach-name">Coach Amanda</div>
+              <div class="coach-role">Softball &amp; Baseball Instructor</div>
+            </div>
+          </div>
+          <p class="coach-details">
+            Specializes in softball hitting, slapping, pitching and catching.
+            Emphasis on confidence, leadership, and competitive game
+            preparation.
+          </p>
+          <div class="lesson-meta">
+            <span>Softball Specialist</span>
+            <span>Hitting &amp; Pitching</span>
+            <span>Youth–High School</span>
+          </div>
+          <!-- TODO: Link this button to your booking system -->
+          <a href="#contact" class="btn btn-primary"
+            >Book Lesson with Coach Amanda</a
+          >
+        </article>
+      </div>
+    </section>
+
+    <!-- PARTIES & CAGE RENTALS -->
+    <section id="parties">
+      <h2>Parties &amp; Events</h2>
+      <p class="section-subtitle">
+        Host your next birthday, team party, or special event at GJB Sports.
+      </p>
+
+      <div class="flex-two">
+        <!-- PARTIES CARD -->
+        <article class="card">
+          <h3>Baseball &amp; Softball Parties</h3>
+          <p>
+            Celebrate with games, contests, and cage time run by our coaches.
+            Perfect for birthdays, team celebrations, and group outings.
+          </p>
+          <ul class="card-list">
+            <li>90–120 minute party packages</li>
+            <li>Guided drills, games &amp; competitions</li>
+            <li>Use of cages &amp; turf space</li>
+            <li>Bring your own food, cake &amp; decorations</li>
+          </ul>
+          <!-- TODO: Set your real email in the mailto below -->
+          <a
+            href="mailto:info@gjbsports.com?subject=Party%20Request"
+            class="btn btn-primary"
+            >Contact Us About a Party</a
+          >
+        </article>
+
+        <!-- CAGE RENTAL PREVIEW -->
+        <article id="cages" class="card">
+          <h3>Cage Rentals</h3>
+          <p>
+            Reserve a batting cage for individual work, small groups, or full
+            team practices.
+          </p>
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Duration</th>
+                <th>Price</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>30 Minutes</td>
+                <td>$XX</td>
+                <td>Individual / Small Group</td>
+              </tr>
+              <tr>
+                <td>60 Minutes</td>
+                <td>$XX</td>
+                <td>Great for 1–4 athletes</td>
+              </tr>
+              <tr>
+                <td>Team Practice (90+ min)</td>
+                <td>$XX</td>
+                <td>Contact for team rates</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- TODO: Link to actual cage booking OR email -->
+          <a
+            href="mailto:info@gjbsports.com?subject=Cage%20Rental%20Request"
+            class="btn btn-secondary"
+            >Request Cage Time</a
+          >
+        </article>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop">
+      <h2>Shop</h2>
+      <p class="section-subtitle">
+        Gear coming soon! Use this section to list bats, gloves, apparel and
+        other items for sale.
+      </p>
+
+      <div class="shop-grid">
+        <!-- SAMPLE ITEMS – replace with real ones later -->
+        <article class="shop-item">
+          <div class="shop-item-img">Product Image</div>
+          <strong>GJB Sports T-Shirt</strong>
+          <p>Comfortable, athletic-fit tee available in youth &amp; adult sizes.</p>
+          <div class="shop-price">$XX.XX</div>
+          <button class="btn btn-primary" type="button">Add to Cart (coming soon)</button>
+        </article>
+
+        <article class="shop-item">
+          <div class="shop-item-img">Product Image</div>
+          <strong>GJB Sports Hat</strong>
+          <p>Structured cap perfect for practice, games, and everyday wear.</p>
+          <div class="shop-price">$XX.XX</div>
+          <button class="btn btn-primary" type="button">Add to Cart (coming soon)</button>
+        </article>
+
+        <article class="shop-item">
+          <div class="shop-item-img">Product Image</div>
+          <strong>Batting Gloves</strong>
+          <p>High-grip gloves designed for comfort and durability.</p>
+          <div class="shop-price">$XX.XX</div>
+          <button class="btn btn-primary" type="button">Add to Cart (coming soon)</button>
+        </article>
+      </div>
+
+      <p style="font-size: 0.85rem; margin-top: 0.75rem; color: #555;">
+        <!-- Instruction for you -->
+        When you're ready, you can replace these sample items with your real products,
+        prices, and links to an online checkout (Square, Stripe, etc.).
+      </p>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <h2>Gallery</h2>
+      <p class="section-subtitle">
+        Add photos from lessons, clinics, tournaments, and team events.
+      </p>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">Photo 1</div>
+        <div class="gallery-item">Photo 2</div>
+        <div class="gallery-item">Photo 3</div>
+        <div class="gallery-item">Photo 4</div>
+      </div>
+
+      <p style="font-size: 0.85rem; margin-top: 0.75rem; color: #555;">
+        Replace each “Photo” box with actual images once you have them.
+      </p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="section-subtitle">
+        Have questions about lessons, parties, or cage rentals? Reach out and
+        we’ll get back to you as soon as possible.
+      </p>
+
+      <div class="contact-grid">
+        <!-- CONTACT FORM -->
+        <form
+          action="mailto:info@gjbsports.com"
+          method="post"
+          enctype="text/plain"
+        >
+          <!-- Replace info@gjbsports.com with your actual email -->
+          <div>
+            <label for="name">Athlete / Parent Name</label>
+            <input type="text" id="name" name="Name" required />
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Email" required />
+          </div>
+
+          <div>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="Phone" />
+          </div>
+
+          <div>
+            <label for="interest">I’m Interested In</label>
+            <select id="interest" name="Interest">
+              <option value="lessons-jose">Lessons with Coach Jose</option>
+              <option value="lessons-amanda">Lessons with Coach Amanda</option>
+              <option value="party">Party / Event</option>
+              <option value="cage-rental">Cage Rental</option>
+              <option value="shop">Shop / Merchandise</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message">Message / Preferred Days &amp; Times</label>
+            <textarea id="message" name="Message"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+
+        <!-- CONTACT INFO -->
+        <div class="contact-info">
+          <p><strong>Email:</strong> info@gjbsports.com</p>
+          <p><strong>Phone:</strong> (XXX) XXX-XXXX</p>
+          <p><strong>Location:</strong> Your Facility Address Here</p>
+          <p style="margin-top: 0.8rem;">
+            Follow GJB Sports on social media for updates on clinics, camps,
+            and special events.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> GJB Sports. All rights reserved.
+  </footer>
+
+  <script>
+    // Set current year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
